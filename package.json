@@ -1,0 +1,61 @@
+{
+  "name": "@mesmotronic/xpad",
+  "author": "Neil Rackett",
+  "license": "BSD-2-Clause",
+  "description": "Simplified Gamepad API for Xbox 360 and Xbox One controllers",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mesmotronic/js-simple-xpad.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "keywords": [
+    "xpad",
+    "xbox360",
+    "xboxone",
+    "xboxseries",
+    "gamepad-api",
+    "gamepad",
+    "gamepadapi",
+    "gamepad-api",
+    "xbox",
+    "joystick",
+    "game",
+    "games",
+    "controller"
+  ],
+  "bugs": {
+    "url": "https://github.com/mesmotronic/js-simple-xpad/issues"
+  },
+  "homepage": "https://github.com/mesmotronic/js-simple-xpad#readme",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b ./tsconfig.lib.json",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "prepublish": "npm run build"
+  },
+  "peerDependencies": {
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.13.4",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
