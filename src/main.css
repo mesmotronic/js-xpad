@@ -25,8 +25,8 @@ body,
 #axes {
   position: relative;
   border: 1px solid #444;
-  width: 200px;
-  height: 200px;
+  width: 480px;
+  height: 480px;
 
   #axes-center {
     position: absolute;
@@ -51,9 +51,23 @@ body,
   }
 }
 
-#button-indicator {
-  border: 1px solid #444;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+#buttons {
+  border-collapse: separate;
+  border-spacing: 8px 5px;
+
+  tr:nth-child(n+14) {
+    color: #999;
+  }
+
+  td.separator {
+    border-bottom: 1px solid #333;
+    height: 5px
+  }
+
+  td:first-child:not(:last-child) {
+    border: 1px solid #444;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+  }
 }

@@ -8,8 +8,13 @@ function animate() {
   xpad.update();
 
   const { anyAxes, anyButton } = xpad.state;
-  axisIndicator.style.transform = `translate(${anyAxes.x * 100}px, ${anyAxes.y * 100}px)`;
-  buttonIndicator.style.backgroundColor = anyButton ? `rgba(255, 0, 0, ${anyButton})` : 'transparent';
+  axisIndicator.style.transform = `translate(${anyAxes.x * 240}px, ${anyAxes.y * 240}px)`;
+  buttonIndicator.style.backgroundColor = `rgba(255, 0, 0, ${anyButton})`;
+
+  for (let i = 0; i < 16; i++) {
+    const buttonIndicator = document.getElementById(`button-${i}-indicator`) as HTMLSpanElement;
+    buttonIndicator.style.backgroundColor = `rgba(255, 0, 0, ${xpad.state.buttons[i]})`;
+  }
 
   requestAnimationFrame(animate);
 }
