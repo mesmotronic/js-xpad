@@ -17,12 +17,22 @@ import { Xpad, XpadButton } from "@memotronic/xpad";
 
 const xpad = new Xpad();
 
+xpad
+  .addEventListener(XpadEvent.CONNECT, console.log)
+  .addEventListener(XpadEvent.DISCONNECT, console.log)
+  .addEventListener(XpadEvent.BUTTON_UP, console.log)
+  .addEventListener(XpadEvent.BUTTON_DOWN, console.log)
+  .addEventListener(XpadEvent.BUTTON_CHANGE, console.log)
+  .addEventListener(XpadEvent.STICK_ACTIVE, console.log)
+  .addEventListener(XpadEvent.STICK_INACTIVE, console.log)
+  .addEventListener(XpadEvent.STICK_CHANGE, console.log);
+
 function animate() {
   xpad.update();
 
-  const { anyAxes, anyButton, buttons } = xpad.state;
+  const { anyStick, anyButton, buttons } = xpad.state;
 
-  console.log(`Move: ${anyAxes.x}, ${anyAxes.y}`);
+  console.log(`Move: ${anyStick.x}, ${anyStick.y}`);
   console.log(`Fire: ${anyButton}`);
 
   console.log(`A: ${buttons[XpadButton.A]}`);
@@ -58,16 +68,17 @@ To use multiple controllers, specify the gamepad index in the constructor, e.g. 
 
 The XpadState class represents the current state of a controller:
 
-| Member        | Type       | Description                                                               |
-| ------------- | ---------- | ------------------------------------------------------------------------- |
-| `leftStick`   | `XpadAxes` | Left analog stick axes                                                    |
-| `rightStick`  | `XpadAxes` | Right analog stick axes                                                   |
-| `dpad`        | `XpadAxes` | D-pad axes                                                                |
-| `buttons`     | `number[]` | Array of button states (0 to 1); use `XpadButton` enum for button indexes |
-| `dpadEnabled` | `boolean`  | Whether D-pad input is included in anyAxes calculation (default: true)    |
-| `anyAxes`     | `XpadAxes` | Combined axes from left stick, right stick, and optionally D-pad          |
-| `anyButton`   | `number`   | Highest value of main buttons (A, B, X, Y, LB, RB, LT, RT)                |
-| `reset()`     | `void`     | Resets all axes and buttons to default state                              |
+| Member        | Type          | Description                                                               |
+| ------------- | ------------- | ------------------------------------------------------------------------- |
+| `leftStick`   | `XpadAxes`    | Left analog stick axes                                                    |
+| `rightStick`  | `XpadAxes`    | Right analog stick axes                                                   |
+| `dpad`        | `XpadAxes`    | D-pad axes                                                                |
+| `dpadEnabled` | `boolean`     | Whether D-pad input is included in anyStick calculation (default: true)   |
+| `buttons`     | `number[]`    | Array of button states (0 to 1); use `XpadButton` enum for button indexes |
+| `sticks`      | `XpadStick[]` | Array of stick states in `leftStick`, `rightStick`, `dpad` order          |
+| `anyStick`    | `XpadAxes`    | Combined axes from left stick, right stick, and optionally D-pad          |
+| `anyButton`   | `number`      | Highest value of main buttons (A, B, X, Y, LB, RB, LT, RT)                |
+| `reset()`     | `void`        | Resets all axes and buttons to default state                              |
 
 ## License
 

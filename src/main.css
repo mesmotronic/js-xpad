@@ -26,7 +26,7 @@ body,
   flex-direction: row;
   gap: 10px;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
     justify-content: start;
     overflow-y: auto;
@@ -71,13 +71,11 @@ body,
   }
 }
 
-#buttons {
+#buttons,
+#events {
   border-collapse: separate;
   border-spacing: 8px 5px;
-
-  tr:nth-child(n+14) {
-    color: #999;
-  }
+  min-width: 200px;
 
   td.separator {
     border-bottom: 1px solid #333;
@@ -89,5 +87,11 @@ body,
     width: 15px;
     height: 15px;
     border-radius: 50%;
+  }
+}
+
+#buttons {
+  tr:nth-child(n+14) {
+    color: #999;
   }
 }

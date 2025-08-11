@@ -1,24 +1,69 @@
-import { XpadAxes } from "./XpadAxes";
+import { EventDispatcher } from "conbine";
+import { XpadStick } from "./XpadStick";
+import { XpadEvent } from "../events/XpadEvent";
 
-export class XpadState {
-  public leftStick: XpadAxes = new XpadAxes();
-  public rightStick: XpadAxes = new XpadAxes();
-  public dpad: XpadAxes = new XpadAxes();
-  public buttons: number[] = Array(16).fill(0);
+export class XpadState extends EventDispatcher {
+  public leftStick: XpadStick = new XpadStick(0, 0, 0);
+  public rightStick: XpadStick = new XpadStick(0, 0, 1);
+  public dpad: XpadStick = new XpadStick(0, 0, 2);
 
   /**
-   * Enable or disable D-pad input as part of the anyAxes calculation
+   * Enable or disable D-pad input as part of the anyStick calculation
    */
   public dpadEnabled: boolean = true;
+
+  #buttons: number[] = Array(16).fill(0);
+
+  constructor() {
+    super();
+
+    this.sticks.forEach((stick) => {
+      stick.addEventListener(XpadEvent.STICK_ACTIVE, this.redispatchEvent);
+      stick.addEventListener(XpadEvent.STICK_INACTIVE, this.redispatchEvent);
+      stick.addEventListener(XpadEvent.STICK_CHANGE, this.redispatchEvent);
+    });
+  }
+
+  public get buttons(): number[] {
+    return this.#buttons;
+  }
+  public set buttons(value: number[]) {
+    const buttonChanges = value.map((value, index) => value !== this.#buttons[index]);
+    buttonChanges.forEach((changed, index) => {
+      if (changed) {
+        const newValue = value[index];
+        if (newValue !== 0 && this.#buttons[index] === 0) {
+          this.dispatchEvent(new XpadEvent(XpadEvent.BUTTON_DOWN, index, newValue));
+        } else if (newValue === 0 && this.#buttons[index] !== 0) {
+          this.dispatchEvent(new XpadEvent(XpadEvent.BUTTON_UP, index, newValue));
+        }
+        this.dispatchEvent(new XpadEvent(XpadEvent.BUTTON_CHANGE, index, newValue));
+      }
+    });
+
+    this.#buttons = value;
+  }
+
+  public get sticks(): XpadStick[] {
+    return [this.leftStick, this.rightStick, this.dpad];
+  }
 
   /**
    * Get the current state of the left stick, right stick or D-pad
    */
-  public get anyAxes(): XpadAxes {
-    return new XpadAxes(
+  public get anyStick(): XpadStick {
+    return new XpadStick(
       this.leftStick.x || this.rightStick.x || (this.dpadEnabled && this.dpad.x) || 0,
       this.leftStick.y || this.rightStick.y || (this.dpadEnabled && this.dpad.y) || 0
     );
+  }
+
+  /**
+   * @deprecated Use anyStick instead
+   */
+  public get anyAxes(): XpadStick {
+    console.warn("XpadState.anyAxes is deprecated, use anyStick instead");
+    return this.anyStick;
   }
 
   /**
@@ -30,9 +75,15 @@ export class XpadState {
   }
 
   public reset(): void {
-    this.leftStick = new XpadAxes();
-    this.rightStick = new XpadAxes();
-    this.dpad = new XpadAxes();
+    this.leftStick = new XpadStick();
+    this.rightStick = new XpadStick();
+    this.dpad = new XpadStick();
     this.buttons.fill(0);
   }
+
+  // Internal
+
+  protected redispatchEvent = (event: XpadEvent): void => {
+    this.dispatchEvent(event);
+  };
 }
