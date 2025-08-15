@@ -3,7 +3,7 @@
   "author": "Neil Rackett",
   "license": "BSD-2-Clause",
   "description": "Simplified Gamepad API for Xbox 360 and Xbox One controllers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,8 +44,6 @@
     "preview": "vite preview",
     "prepublish": "npm run build"
   },
-  "peerDependencies": {
-  },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@types/node": "^22.13.4",
@@ -57,5 +55,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "conbine": "^5.0.14"
   }
 }
