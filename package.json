@@ -2,7 +2,7 @@
   "name": "@mesmotronic/xpad",
   "author": "Neil Rackett",
   "license": "BSD-2-Clause",
-  "description": "Simplified Gamepad API for Xbox 360 and Xbox One controllers",
+  "description": "Simplified Gamepad API for Xbox 360, One and Series controllers",
   "version": "1.1.1",
   "type": "module",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mesmotronic/js-simple-xpad.git"
+    "url": "git+https://github.com/mesmotronic/js-xpad.git"
   },
   "files": [
     "dist"
@@ -34,9 +34,9 @@
     "controller"
   ],
   "bugs": {
-    "url": "https://github.com/mesmotronic/js-simple-xpad/issues"
+    "url": "https://github.com/mesmotronic/js-xpad/issues"
   },
-  "homepage": "https://github.com/mesmotronic/js-simple-xpad#readme",
+  "homepage": "https://github.com/mesmotronic/js-xpad#readme",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b ./tsconfig.lib.json",
