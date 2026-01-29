@@ -80,6 +80,44 @@ The XpadState class represents the current state of a controller:
 | `anyButton`   | `number`      | Highest value of main buttons (A, B, X, Y, LB, RB, LT, RT)                |
 | `reset()`     | `void`        | Resets all axes and buttons to default state                              |
 
+### XpadButtons
+
+| Enum                 | Value | Notes                                  |
+| -------------------- | ----- | -------------------------------------- |
+| `A`                  | `0`   |                                        |
+| `B`                  | `1`   |                                        |
+| `X`                  | `2`   |                                        |
+| `Y`                  | `3`   |                                        |
+| `LEFT_BUMPER`        | `4`   |                                        |
+| `RIGHT_BUMPER`       | `5`   |                                        |
+| `LEFT_TRIGGER`       | `6`   |                                        |
+| `RIGHT_TRIGGER`      | `7`   |                                        |
+| `BACK`               | `8`   | Xbox 360 back button (same as `VIEW`)  |
+| `START`              | `9`   | Xbox 360 start button (same as `MENU`) |
+| `VIEW`               | `8`   | Xbox One/Series view button            |
+| `MENU`               | `9`   | Xbox One/Series menu button            |
+| `LEFT_STICK_BUTTON`  | `10`  |                                        |
+| `RIGHT_STICK_BUTTON` | `11`  |                                        |
+| `DPAD_UP`            | `12`  |                                        |
+| `DPAD_DOWN`          | `13`  |                                        |
+| `DPAD_LEFT`          | `14`  |                                        |
+| `DPAD_RIGHT`         | `15`  |                                        |
+
+### XpadEvent
+
+Xpad dispatches the following events, where the `index` property of the event tells you the index of the button or stick and the `data` property the value (0 to 1)
+
+| Type             | Description                                       |
+| ---------------- | ------------------------------------------------- |
+| `CONNECT`        | Connected and ready to use                        |
+| `DISCONNECT`     | Disconnected                                      |
+| `BUTTON_DOWN`    | One or more button pressed                        |
+| `BUTTON_UP`      | One or more button released                       |
+| `BUTTON_CHANGE`  | One or more button state has changed              |
+| `STICK_ACTIVE`   | One or more stick is active (not in center)       |
+| `STICK_INACTIVE` | One or more stick has become inactive (in center) |
+| `STICK_CHANGE`   | One or more stick state has changed               |
+
 ## License
 
 BSD 2-Clause License
