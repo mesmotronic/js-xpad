@@ -13,7 +13,7 @@ npm i @mesmotronic/xpad
 ## Example
 
 ```js
-import { Xpad, XpadButton } from "@memotronic/xpad";
+import { Xpad, XpadButton } from "@mesmotronic/xpad";
 
 const xpad = new Xpad();
 

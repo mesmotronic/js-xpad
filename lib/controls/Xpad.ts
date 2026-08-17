@@ -65,6 +65,25 @@ export class Xpad extends EventDispatcher {
     this.state.reset();
   }
 
+  /**
+   * Removes all event listeners and resets the state of the Xpad,
+   * which should no longer be used once disposed
+   */
+  public dispose(): void {
+    window.removeEventListener('gamepadconnected', this.connectedHandler);
+    window.removeEventListener('gamepaddisconnected', this.disconnectedHandler);
+
+    this.state
+      .removeEventListener(XpadEvent.BUTTON_UP, this.redispatchEvent)
+      .removeEventListener(XpadEvent.BUTTON_DOWN, this.redispatchEvent)
+      .removeEventListener(XpadEvent.BUTTON_CHANGE, this.redispatchEvent)
+      .removeEventListener(XpadEvent.STICK_ACTIVE, this.redispatchEvent)
+      .removeEventListener(XpadEvent.STICK_INACTIVE, this.redispatchEvent)
+      .removeEventListener(XpadEvent.STICK_CHANGE, this.redispatchEvent);
+
+    this.reset();
+  }
+
   // Internal
 
   protected redispatchEvent = (event: XpadEvent): void => {
