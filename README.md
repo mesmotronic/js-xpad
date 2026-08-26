@@ -1,6 +1,8 @@
 # Xpad: Xbox Controller API for JavaScript
 
-Xpad is a wrapper for the JavaScript Gamepad API that makes it easy to use one or more Xbox 360 / One / Series controllers with your app or game, whether you want to implement it as a simple joystick (detect direction from any stick or d-pad, or the press of any button) or want to access data from each stick and button individually.
+Xpad is a wrapper for the JavaScript Gamepad API that simplifies the process of using one or more controllers with your web apps and games, regardless of whether you want to implement it as a simple joystick (detect direction from any stick or d-pad, or the press of any button) or access data from each stick and button individually.
+
+Button names follow the Linux `xpad` library's naming conventions.
 
 [Made by @mesmotronic](https://x.com/mesmotronic)
 
@@ -61,6 +63,7 @@ The Xpad class exposes everything you need to interact with your controllers:
 | `state`          | `XpadState`       | Current state of the Xpad                            |
 | `update()`       | `void`            | Updates the state from the current gamepad           |
 | `reset()`        | `void`            | Resets the Xpad state                                |
+| `dispose()`      | `void`            | Removes all listeners; unusable once disposed        |
 
 To use multiple controllers, specify the gamepad index in the constructor, e.g. `new Xpad(0)`
 
@@ -80,28 +83,28 @@ The XpadState class represents the current state of a controller:
 | `anyButton`   | `number`      | Highest value of main buttons (A, B, X, Y, LB, RB, LT, RT)                |
 | `reset()`     | `void`        | Resets all axes and buttons to default state                              |
 
-### XpadButtons
+### XpadButton
 
-| Enum                 | Value | Notes                                  |
-| -------------------- | ----- | -------------------------------------- |
-| `A`                  | `0`   |                                        |
-| `B`                  | `1`   |                                        |
-| `X`                  | `2`   |                                        |
-| `Y`                  | `3`   |                                        |
-| `LEFT_BUMPER`        | `4`   |                                        |
-| `RIGHT_BUMPER`       | `5`   |                                        |
-| `LEFT_TRIGGER`       | `6`   |                                        |
-| `RIGHT_TRIGGER`      | `7`   |                                        |
-| `BACK`               | `8`   | Xbox 360 back button (same as `VIEW`)  |
-| `START`              | `9`   | Xbox 360 start button (same as `MENU`) |
-| `VIEW`               | `8`   | Xbox One/Series view button            |
-| `MENU`               | `9`   | Xbox One/Series menu button            |
-| `LEFT_STICK_BUTTON`  | `10`  |                                        |
-| `RIGHT_STICK_BUTTON` | `11`  |                                        |
-| `DPAD_UP`            | `12`  |                                        |
-| `DPAD_DOWN`          | `13`  |                                        |
-| `DPAD_LEFT`          | `14`  |                                        |
-| `DPAD_RIGHT`         | `15`  |                                        |
+| Enum         | Alternative          | Value | Notes                                                                 |
+| ------------ | -------------------- | ----- | --------------------------------------------------------------------- |
+| `SOUTH`      | `A`                  | `0`   | PS Cross · Switch B                                                   |
+| `EAST`       | `B`                  | `1`   | PS Circle · Switch A                                                  |
+| `NORTH`      | `X`                  | `2`   | PS Square · Switch Y; physically the west button                      |
+| `WEST`       | `Y`                  | `3`   | PS Triangle · Switch X; physically the north button                   |
+| `TL`         | `LEFT_BUMPER`        | `4`   | PS L1 · Switch L                                                      |
+| `TR`         | `RIGHT_BUMPER`       | `5`   | PS R1 · Switch R                                                      |
+| `TL2`        | `LEFT_TRIGGER`       | `6`   | PS L2 · Switch ZL                                                     |
+| `TR2`        | `RIGHT_TRIGGER`      | `7`   | PS R2 · Switch ZR                                                     |
+| `SELECT`     | `BACK`, `VIEW`       | `8`   | Xbox Back/View · PS Share/Create · Switch Minus                       |
+| `START`      | `MENU`               | `9`   | Xbox Start/Menu · PS Options · Switch Plus                            |
+| `THUMBL`     | `LEFT_STICK_BUTTON`  | `10`  | PS L3 · Switch left stick press                                       |
+| `THUMBR`     | `RIGHT_STICK_BUTTON` | `11`  | PS R3 · Switch right stick press                                      |
+| `DPAD_UP`    |                      | `12`  |                                                                       |
+| `DPAD_DOWN`  |                      | `13`  |                                                                       |
+| `DPAD_LEFT`  |                      | `14`  |                                                                       |
+| `DPAD_RIGHT` |                      | `15`  |                                                                       |
+| `MODE`       | `GUIDE`              | `16`  | Xbox Guide · PS PS button · Switch Home; often unavailable on Windows |
+| `RECORD`     | `EXTRA`              | `17`  | Xbox Series Share · Switch Capture · PS touchpad click; non-standard  |
 
 ### XpadEvent
 
