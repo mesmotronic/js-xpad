@@ -12,7 +12,7 @@ export class XpadState extends EventDispatcher {
    */
   public dpadEnabled: boolean = true;
 
-  #buttons: number[] = Array(16).fill(0);
+  #buttons: number[] = Array(18).fill(0);
 
   constructor() {
     super();
