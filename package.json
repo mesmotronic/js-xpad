@@ -2,7 +2,7 @@
   "name": "@mesmotronic/xpad",
   "author": "Neil Rackett",
   "license": "BSD-2-Clause",
-  "description": "Simplified Gamepad API for web apps and games",
+  "description": "Xpad: Simplified Gamepad API for web apps and games",
   "version": "1.2.1",
   "type": "module",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mesmotronic/js-xpad.git"
+    "url": "git+https://github.com/mesmotronic/web-xpad.git"
   },
   "files": [
     "dist"
@@ -34,9 +34,9 @@
     "controller"
   ],
   "bugs": {
-    "url": "https://github.com/mesmotronic/js-xpad/issues"
+    "url": "https://github.com/mesmotronic/web-xpad/issues"
   },
-  "homepage": "https://github.com/mesmotronic/js-xpad#readme",
+  "homepage": "https://github.com/mesmotronic/web-xpad#readme",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b ./tsconfig.lib.json",
