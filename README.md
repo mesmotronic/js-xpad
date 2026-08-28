@@ -1,4 +1,4 @@
-# Xpad: Xbox Controller API for JavaScript
+# Xpad: Simplified Gamepad API for JavaScript
 
 Xpad is a wrapper for the JavaScript Gamepad API that simplifies the process of using one or more controllers with your web apps and games, regardless of whether you want to implement it as a simple joystick (detect direction from any stick or d-pad, or the press of any button) or access data from each stick and button individually.
 
