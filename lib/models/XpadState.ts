@@ -1,6 +1,6 @@
 import { EventDispatcher } from "conbine";
-import { XpadStick } from "./XpadStick";
-import { XpadEvent } from "../events/XpadEvent";
+import { XpadStick } from "./XpadStick.js";
+import { XpadEvent } from "../events/XpadEvent.js";
 
 export class XpadState extends EventDispatcher {
   public leftStick: XpadStick = new XpadStick(0, 0, 0);

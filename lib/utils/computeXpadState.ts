@@ -1,6 +1,6 @@
-import { XpadButton } from "../enums/XpadButton";
-import { XpadState } from "../models/XpadState";
-import { computeInputValue } from "./computeInputValue";
+import { XpadButton } from "../enums/XpadButton.js";
+import { XpadState } from "../models/XpadState.js";
+import { computeInputValue } from "./computeInputValue.js";
 
 export const computeXpadState = (gamepad: Gamepad, state: XpadState, inputThreshold = 0.15): XpadState => {
   state.buttons = gamepad.buttons.map((button) => computeInputValue(button?.value, inputThreshold));

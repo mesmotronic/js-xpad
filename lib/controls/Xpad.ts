@@ -1,7 +1,7 @@
 import { EventDispatcher } from "conbine";
-import { XpadEvent } from "../events/XpadEvent";
-import { XpadState } from "../models/XpadState";
-import { computeXpadState } from "../utils/computeXpadState";
+import { XpadEvent } from "../events/XpadEvent.js";
+import { XpadState } from "../models/XpadState.js";
+import { computeXpadState } from "../utils/computeXpadState.js";
 
 export class Xpad extends EventDispatcher {
   public inputThreshold: number = 0.15;

@@ -1,6 +1,6 @@
-export * from "./controls/Xpad";
-export * from "./enums/XpadButton";
-export * from "./events/XpadEvent";
-export * from "./models/XpadState";
-export * from "./models/XpadStick";
+export * from "./controls/Xpad.js";
+export * from "./enums/XpadButton.js";
+export * from "./events/XpadEvent.js";
+export * from "./models/XpadState.js";
+export * from "./models/XpadStick.js";
 

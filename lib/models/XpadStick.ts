@@ -1,5 +1,5 @@
 import { EventDispatcher } from "conbine";
-import { XpadEvent } from "../events/XpadEvent";
+import { XpadEvent } from "../events/XpadEvent.js";
 
 export class XpadStick extends EventDispatcher {
   constructor(
