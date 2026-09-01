@@ -6,12 +6,15 @@ import { computeXpadState } from "../utils/computeXpadState.js";
 export class Xpad extends EventDispatcher {
   public inputThreshold: number = 0.15;
 
+  #autoIndex: boolean;
+  #index: number;
   #state = new XpadState();
 
-  constructor(
-    public readonly index: number = 0
-  ) {
+  constructor(index: number = -1) {
     super();
+
+    this.#index = index;
+    this.#autoIndex = index < 0;
 
     window.addEventListener('gamepadconnected', this.connectedHandler);
     window.addEventListener('gamepaddisconnected', this.disconnectedHandler);
@@ -26,6 +29,15 @@ export class Xpad extends EventDispatcher {
   }
 
   /**
+   * Index of the gamepad this Xpad is bound to, or -1 if none is available.
+   * Without an explicit index, binds to the first connected gamepad and
+   * rebinds when that gamepad goes away
+   */
+  public get index(): number {
+    return this.computeIndex(navigator.getGamepads());
+  }
+
+  /**
    * Returns true if the Xpad is connected
    */
   public get connected(): boolean {
@@ -37,7 +49,9 @@ export class Xpad extends EventDispatcher {
    */
   public get gamepad(): Gamepad | null {
     const gamepads = navigator.getGamepads();
-    return gamepads[this.index] ?? null;
+    const index = this.computeIndex(gamepads);
+
+    return gamepads[index] ?? null;
   }
 
   /**
@@ -92,13 +106,23 @@ export class Xpad extends EventDispatcher {
 
   protected connectedHandler = (event: GamepadEvent): void => {
     if (event.gamepad.index !== this.index) return;
+
     this.update();
-    this.dispatchEvent(new XpadEvent(XpadEvent.CONNECT, this.index));
+    this.dispatchEvent(new XpadEvent(XpadEvent.CONNECT, event.gamepad.index));
   };
 
   protected disconnectedHandler = (event: GamepadEvent): void => {
-    if (event.gamepad.index !== this.index) return;
+    if (event.gamepad.index !== this.#index) return;
+
     this.reset();
-    this.dispatchEvent(new XpadEvent(XpadEvent.DISCONNECT, this.index));
+    this.dispatchEvent(new XpadEvent(XpadEvent.DISCONNECT, event.gamepad.index));
   };
+
+  protected computeIndex(gamepads: (Gamepad | null)[]): number {
+    if (this.#autoIndex && !gamepads[this.#index]?.connected) {
+      this.#index = gamepads.findIndex(gamepad => gamepad?.connected);
+    }
+
+    return this.#index;
+  }
 }

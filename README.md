@@ -57,7 +57,7 @@ The Xpad class exposes everything you need to interact with your controllers:
 | Member           | Type              | Description                                          |
 | ---------------- | ----------------- | ---------------------------------------------------- |
 | `inputThreshold` | `number`          | Threshold for axis/button activation (default: 0.15) |
-| `index`          | `number`          | Gamepad index (default: 0)                           |
+| `index`          | `number`          | Index of bound gamepad, or -1 if none (readonly)     |
 | `connected`      | `boolean`         | `true` if the gamepad is connected                   |
 | `gamepad`        | `Gamepad \| null` | The browser Gamepad instance for this Xpad           |
 | `state`          | `XpadState`       | Current state of the Xpad                            |
@@ -65,7 +65,9 @@ The Xpad class exposes everything you need to interact with your controllers:
 | `reset()`        | `void`            | Resets the Xpad state                                |
 | `dispose()`      | `void`            | Removes all listeners; unusable once disposed        |
 
-To use multiple controllers, specify the gamepad index in the constructor, e.g. `new Xpad(0)`
+By default, `new Xpad()` binds to the first available gamepad and rebinds if it is disconnected.
+
+To use multiple controllers, specify the gamepad index in the constructor, e.g. `new Xpad(0)`, which pins Xpad to that index.
 
 ### XpadState
 
